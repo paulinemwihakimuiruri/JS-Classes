@@ -232,3 +232,39 @@ console.log("Updated feedback:",employee.feedback);
 //  and completionStatus), then add prototype methods to return names of students who completed 
 // the course, count enrolled students by expertise area, and use control flow to output different 
 // messages for instructors with more or less than 5 students.
+
+class Course{
+    constructor(title,instructor,students){
+        this.title = title;
+        this.instructor = instructor;
+        this.students = students;
+    }
+};
+
+Course.prototype.courseCompleted = function (){
+    return this.students.filter(student => student.completionStatus).map(student => student.name);
+
+};
+Course.prototype.enrolledByExpertise = function (){
+    return this.students.length
+};
+Course.prototype.instructorMessage = function(){
+    if(this.students.length < 5){
+        return `${this.instructor.name} has less than 5 students enrolled`
+    }else{
+        return`${this.instructor.name} has more than 5 students enrolled`
+    }
+}
+const course = new Course("Machine Learning",{name: "Daniel", expertise: "Machine Learning Trainor"},[
+    {name: "Lucy Muhia", completionStatus: true},
+    {name: "Brian Kamau", completionStatus: false},
+    {name: "Ann Wambui", completionStatus: true},
+    {name: "Francis Njoroge", completionStatus: true},
+    {name: "Esther Wambui", completionStatus: false},
+
+]);
+console.log("Completed students:", course.courseCompleted());
+console.log("Total enrolled students are:", course.enrolledByExpertise());
+console.log("The instructor message is:", course.instructorMessage());
+
+
